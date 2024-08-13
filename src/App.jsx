@@ -10,7 +10,7 @@ function App() {
     <>
       <TopNav/>
       <LeftNav/>
-      <div>
+      <div className='main_content'>
 
       </div>
     </>

@@ -1,8 +1,10 @@
 @use "../../stylesheet/variables" as v;
 
 .left_nav{
-    position: fixed;
+    position: absolute;
     left: 0;
+    top:0;
+    z-index: -1;
     height: 100vh;
     width: fit-content;
     background-color: v.$color-bgnav;
