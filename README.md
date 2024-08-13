@@ -47,7 +47,7 @@ Une partie importante du projet sera de développer une documentation complète 
 
 1. Clonez le repository de l'application
    ```sh
-   git clone https://github.com/AurelieDuynslaeger/Kasa_Projet11_OCR.git
+   git clone https://github.com/AurelieDuynslaeger/SportSee_P12_OCR.git
    ```
 
 2. Installez les dépendances
