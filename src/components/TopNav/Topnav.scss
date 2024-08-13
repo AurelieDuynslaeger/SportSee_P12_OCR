@@ -1,0 +1,24 @@
+@use "../../stylesheet/variables" as v;
+
+.top_nav{
+    background-color: v.$color-bgnav;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: v.$font-roboto;
+    padding: 1.5rem;
+    .top_nav_links{
+        flex-basis: 80%;
+        color: v.$text-light;
+        ul{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            li{
+                list-style-type: none;
+                font-size: 2.4rem;
+            }
+        }
+    }
+}
