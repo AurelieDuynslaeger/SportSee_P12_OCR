@@ -13,6 +13,65 @@
   margin: 0 auto; 
   padding: 2rem; 
   min-height: 89vh; 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto 1fr 1fr;
+  grid-template-areas: 
+    "user_header user_header user_header user_header"
+    "user_daily_activity user_daily_activity user_daily_activity user_nutrition"
+    "user_sessions_length user_radar_graph user_score user_nutrition";
+  gap: 10px; 
+  padding: 20px; 
 }
+
+.user_header {
+  grid-area: user_header;
+  background-color: #f0f0f0;
+  border: 2px red solid;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.user_daily_activity {
+  grid-area: user_daily_activity;
+  background-color: #e0e0e0;
+  border: 2px red solid;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.user_sessions_length {
+  grid-area: user_sessions_length;
+  background-color: #d0d0d0;
+  padding: 20px;
+  border: 2px red solid;
+  border-radius: 20px;
+}
+
+.user_radar_graph {
+  grid-area: user_radar_graph;
+  background-color: #c0c0c0;
+  padding: 20px;
+  border: 2px red solid;
+  border-radius: 20px;
+}
+
+.user_score {
+  grid-area: user_score;
+  background-color: #b0b0b0;
+  border: 2px red solid;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.user_nutrition {
+  grid-area: user_nutrition;
+  background-color: #a0a0a0;
+  border: 2px red solid;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+
 
 
