@@ -45,7 +45,7 @@
   grid-area: user_daily_activity;
   border: 2px red solid;
   border-radius: 20px;
-  padding: 20px;
+  padding: 15px;
   .daily_activity_header{
     display: flex;
     align-items: center;
@@ -55,10 +55,20 @@
       width: 20%;
       align-items: center;
       justify-content: space-between;
+      .weight, .kcal {
+        display: flex;
+        align-items: center;
+      }
+      .weight_dot{
+        color: v.$text-dark;
+      }
+      .kcal_dot{
+        color: v.$color-primary;
+      }
     }
   }
   .daily_activity_barchart{
-    background-color: red;
+    height: 300px;
   }
 }
 
