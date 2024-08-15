@@ -8,13 +8,16 @@ import './stylesheet/App.scss'
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from './mocks/mockData';
 
 //barchart daily activity
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+//radar graph
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis} from 'recharts';
 
 function App() {
 
   const userData = USER_MAIN_DATA.find(user => user.id === 12);
   const userActivity = USER_ACTIVITY.find(activity => activity.userId === 12);
-  const userAverageSessions = USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === 12);
+  // const userAverageSessions = USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === 12);
   const userPerformance = USER_PERFORMANCE.find(performance => performance.userId === 12);
 
 
@@ -53,9 +56,9 @@ function App() {
                   left: 20,
                   bottom:5,
                 }}>
-                  <CartesianGrid strokeDasharray="3"/>
-                  <XAxis dataKey="day"/>
+                  <CartesianGrid strokeDasharray="3 3"/>
                   <YAxis/>
+                  <XAxis dataKey="day"/>
                   <Tooltip/>
                   <Bar dataKey="kilogram" fill='#020203'/>
                   <Bar dataKey="calories" fill='#FF0101'/>
@@ -64,7 +67,15 @@ function App() {
           </div>
         </div>
         <div className="user_sessions_length">Sessions Lenght</div>
-        <div className="user_radar_graph">Radar Graph</div>
+        <div className="user_radar_graph">
+        <ResponsiveContainer width="100%" height="100%">
+          <RadarChart cx="50%" cy="50%" outerRadius="80%" data={userPerformance.data}>
+            <PolarGrid />
+            <PolarAngleAxis dataKey={userPerformance.kind} />
+            <Radar name="Mike" dataKey="value" fill="#ff01014d"/>
+          </RadarChart>
+      </ResponsiveContainer>
+        </div>
         <div className="user_score">User Score</div>
         <div className="user_nutrition">
           {/* map User_main_data pour appeler 4 div => composant UserNutritionCard */}
