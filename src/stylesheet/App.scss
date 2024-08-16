@@ -93,7 +93,7 @@
 .user_sessions_length {
   grid-area: user_sessions_length;
   background-color: red;
-  // padding: 10px;
+  padding: 10px;
   border-radius: 5px;
   position: relative;
   h3{
@@ -105,16 +105,6 @@
     color: rgba(255, 255, 255,0.6);
     font-weight: 400;
   }
-  // .custom-tooltip {
-  //   background-color: v.$color-primary;
-  //   padding: 10px;
-  //   color: v.$text-light;
-  //   position: relative;
-  //   transform: translateY(-40px);
-  //   p{
-  //     font-size: 0.7rem;
-  //     font-weight: 700;
-  //   }
 }
 
 
@@ -128,6 +118,10 @@
 .user_score {
   grid-area: user_score;
   padding: 10px;
+  h3{
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
   .obj_text{
     color: v.$text-mid;
     font-size: 1.2rem;

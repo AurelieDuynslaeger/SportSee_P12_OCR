@@ -61,12 +61,7 @@ function App() {
                 width={500}
                 height={350}
                 data={userActivity.sessions}
-                margin={{
-                  top:5,
-                  right: 30,
-                  left: 20,
-                  bottom:5,
-                }}>
+                >
                   <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false}/>
                   <YAxis/>
                   <XAxis dataKey="day"/>
@@ -85,7 +80,7 @@ function App() {
               margin={{
                 top: 20,
                 left: 2,
-                right: 0
+                right: 5,
               }}
             >
               <XAxis
@@ -93,6 +88,7 @@ function App() {
                 axisLine={false}
                 tickLine={false}
                 tickFormatter={(tick) => ['L', 'M', 'M', 'J', 'V', 'S', 'D'][tick - 1]}
+                tick={{ fill: '#ffffff', fontSize: 12 }}
               />
               <Tooltip/>
               <Line
@@ -108,8 +104,8 @@ function App() {
         <div className="user_radar_graph">
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radar_data}>
-              <PolarGrid />
-              <PolarAngleAxis dataKey="subject" />
+              <PolarGrid radialLines={false}/>
+              <PolarAngleAxis dataKey="subject" tick={{ fill: '#ffffff', fontSize: 10 }}/>
               <Radar name="Mike" dataKey="value" fill="#ff01014d"/>
             </RadarChart>
           </ResponsiveContainer>
