@@ -42,7 +42,6 @@
 
 .user_daily_activity {
   grid-area: user_daily_activity;
-  border: 2px red solid;
   border-radius: 20px;
   padding: 10px;
   .daily_activity_header{
@@ -94,23 +93,40 @@
 .user_sessions_length {
   grid-area: user_sessions_length;
   background-color: red;
-  padding: 10px;
-  border: 2px blue solid;
-  border-radius: 20px;
+  // padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  h3{
+    position: absolute;
+    top:1.5rem;
+    left: 3rem;
+    font-size: 1.2rem;
+    width: 40%;
+    color: rgba(255, 255, 255,0.6);
+    font-weight: 400;
+  }
+  // .custom-tooltip {
+  //   background-color: v.$color-primary;
+  //   padding: 10px;
+  //   color: v.$text-light;
+  //   position: relative;
+  //   transform: translateY(-40px);
+  //   p{
+  //     font-size: 0.7rem;
+  //     font-weight: 700;
+  //   }
 }
+
 
 .user_radar_graph {
   grid-area: user_radar_graph;
   background-color: #282D30;
   padding: 10px;
-  border: 2px blue solid;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .user_score {
   grid-area: user_score;
-  border: 2px blue solid;
-  border-radius: 20px;
   padding: 10px;
   .obj_text{
     color: v.$text-mid;

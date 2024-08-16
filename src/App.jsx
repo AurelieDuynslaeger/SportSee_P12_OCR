@@ -8,13 +8,13 @@ import './stylesheet/App.scss'
 //mock datas
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from './mocks/mockData';
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis,RadialBarChart, RadialBar } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis,RadialBarChart, RadialBar, LineChart, Line } from 'recharts';
 
 function App() {
 
   const userData = USER_MAIN_DATA.find(user => user.id === 12);
   const userActivity = USER_ACTIVITY.find(activity => activity.userId === 12);
-  // const userAverageSessions = USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === 12);
+  const userAverageSessions = USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === 12);
   const userPerformance = USER_PERFORMANCE.find(performance => performance.userId === 12);
 
   //doc recharts subject et value pour le radar graph
@@ -31,8 +31,6 @@ function App() {
     fill: '#ff0101'
     }
   ]
-
-
 
   return (
     <>
@@ -79,7 +77,34 @@ function App() {
               </ResponsiveContainer>
           </div>
         </div>
-        <div className="user_sessions_length">Sessions Lenght</div>
+        <div className="user_sessions_length">
+          <h3>Durée moyenne des sessions</h3>
+          <ResponsiveContainer width="100%" height={250}>
+            <LineChart
+              data={userAverageSessions.sessions}
+              margin={{
+                top: 20,
+                left: 2,
+                right: 0
+              }}
+            >
+              <XAxis
+                dataKey="day"
+                axisLine={false}
+                tickLine={false}
+                tickFormatter={(tick) => ['L', 'M', 'M', 'J', 'V', 'S', 'D'][tick - 1]}
+              />
+              <Tooltip/>
+              <Line
+                type="monotone"
+                dataKey="sessionLength"
+                stroke="#FFFFFF"
+                dot={false}
+                activeDot={{ r: 2 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>    
+        </div>
         <div className="user_radar_graph">
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radar_data}>
