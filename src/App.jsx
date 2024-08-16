@@ -1,6 +1,7 @@
 
 import LeftNav from './components/LeftNav/LeftNav'
 import TopNav from './components/TopNav/TopNav'
+import CustomTooltip from './components/CustomTooltip';
 import { BsDot } from "react-icons/bs";
 import './stylesheet/App.scss'
 
@@ -8,7 +9,6 @@ import './stylesheet/App.scss'
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from './mocks/mockData';
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis,RadialBarChart, RadialBar } from 'recharts';
-
 
 function App() {
 
@@ -33,6 +33,7 @@ function App() {
   ]
 
 
+
   return (
     <>
       <TopNav/>
@@ -44,7 +45,7 @@ function App() {
         </div>
         <div className="user_daily_activity">
           <div className='daily_activity_header'>
-            <h2>Activité Quotidiennes</h2>
+            <h2>Activité Quotidienne</h2>
             <div className='weight_kcal'>
               <div className='weight'>
                 <BsDot className='weight_dot'/>
@@ -71,7 +72,7 @@ function App() {
                   <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false}/>
                   <YAxis/>
                   <XAxis dataKey="day"/>
-                  <Tooltip/>
+                  <Tooltip content={<CustomTooltip />}/>
                   <Bar dataKey="kilogram" fill='#020203'/>
                   <Bar dataKey="calories" fill='#FF0101'/>
                 </BarChart>
@@ -117,7 +118,7 @@ function App() {
               >
                 <tspan
                   x="50%"
-                  dy="-0.5em" // Déplace le texte 12% légèrement vers le haut pour mieux aligner
+                  dy="-0.5em" 
                   fontSize="24"
                   fontWeight="bold"
                   fill="#000"
@@ -126,9 +127,9 @@ function App() {
                 </tspan>
                 <tspan
                   x="50%"
-                  dy="1.5em" // Positionne "de votre objectif" en dessous de 12%
+                  dy="1.5em" 
                   fontSize="1.2rem"
-                  fill="#a9a9a9" // Utilisez la couleur grise claire ici
+                  fill="#a9a9a9" 
                   className="obj_text"
                 >
                   de votre objectif

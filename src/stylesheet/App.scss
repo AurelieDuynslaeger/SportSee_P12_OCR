@@ -9,7 +9,7 @@
 .main_content {
   max-width: 1200px; 
   margin: 0 auto;
-  min-height: 89vh; 
+  height: 90vh; 
   // width: 93vw;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -49,26 +49,46 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    h2{
+      font-size: 1.5rem;
+    }
     .weight_kcal{
       display: flex;
-      width: 20%;
+      width: 30%;
       align-items: center;
       justify-content: space-between;
       .weight, .kcal {
         display: flex;
         align-items: center;
+        p{
+          font-size: 1.4rem;
+          color: v.$text-mid;
+        }
       }
       .weight_dot{
         color: v.$text-dark;
+        font-size: 2.5rem;
       }
       .kcal_dot{
         color: v.$color-primary;
+        font-size: 2.5rem;
       }
     }
   }
   .daily_activity_barchart{
     height: 300px;
+    .custom-tooltip {
+      background-color: v.$color-primary;
+      padding: 10px;
+      color: v.$text-light;
+      position: relative;
+      transform: translateY(-40px);
+      p{
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
   }
+}
 }
 
 .user_sessions_length {
