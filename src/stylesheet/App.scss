@@ -8,8 +8,7 @@
 
 .main_content {
   max-width: 1200px; 
-  margin: 0 auto; 
-  padding: 2rem; 
+  margin: 0 auto;
   min-height: 89vh; 
   // width: 93vw;
   display: grid;
@@ -20,13 +19,13 @@
     "user_daily_activity user_daily_activity user_daily_activity user_nutrition"
     "user_sessions_length user_radar_graph user_score user_nutrition";
   gap: 10px; 
-  padding: 20px; 
+  padding: 10px; 
   font-family: v.$font-roboto;
 }
 
 .user_header {
   grid-area: user_header;
-  padding: 20px;
+  padding: 10px;
   h1{
     font-size: 4.8rem;
     margin: 0;
@@ -45,7 +44,7 @@
   grid-area: user_daily_activity;
   border: 2px red solid;
   border-radius: 20px;
-  padding: 15px;
+  padding: 10px;
   .daily_activity_header{
     display: flex;
     align-items: center;
@@ -75,7 +74,7 @@
 .user_sessions_length {
   grid-area: user_sessions_length;
   background-color: red;
-  padding: 20px;
+  padding: 10px;
   border: 2px blue solid;
   border-radius: 20px;
 }
@@ -83,17 +82,20 @@
 .user_radar_graph {
   grid-area: user_radar_graph;
   background-color: #282D30;
-  padding: 20px;
+  padding: 10px;
   border: 2px blue solid;
   border-radius: 20px;
 }
 
 .user_score {
   grid-area: user_score;
-  background-color: yellow;
   border: 2px blue solid;
   border-radius: 20px;
-  padding: 20px;
+  padding: 10px;
+  .obj_text{
+    color: v.$text-mid;
+    font-size: 1.2rem;
+  }
 }
 
 .user_nutrition {
@@ -101,7 +103,7 @@
   background-color: green;
   border: 2px blue solid;
   border-radius: 20px;
-  padding: 20px;
+  padding: 10px;
 }
 
 

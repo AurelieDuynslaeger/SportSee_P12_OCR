@@ -7,11 +7,8 @@ import './stylesheet/App.scss'
 //mock datas
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from './mocks/mockData';
 
-//barchart daily activity
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis,RadialBarChart, RadialBar } from 'recharts';
 
-//radar graph
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis} from 'recharts';
 
 function App() {
 
@@ -19,6 +16,21 @@ function App() {
   const userActivity = USER_ACTIVITY.find(activity => activity.userId === 12);
   // const userAverageSessions = USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === 12);
   const userPerformance = USER_PERFORMANCE.find(performance => performance.userId === 12);
+
+  //doc recharts subject et value pour le radar graph
+  //obtenir le label correspondant (compatibles avec Recharts)
+  const radar_data = userPerformance.data.map(item => ({
+    subject : userPerformance.kind[item.kind],
+    value: item.value
+  }));
+
+  //simple radial bar chart pour le score
+  const score_data = [{
+    name: 'Score',
+    uv: userData.todayScore * 100,
+    fill: '#ff0101'
+    }
+  ]
 
 
   return (
@@ -56,7 +68,7 @@ function App() {
                   left: 20,
                   bottom:5,
                 }}>
-                  <CartesianGrid strokeDasharray="3 3"/>
+                  <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false}/>
                   <YAxis/>
                   <XAxis dataKey="day"/>
                   <Tooltip/>
@@ -68,15 +80,63 @@ function App() {
         </div>
         <div className="user_sessions_length">Sessions Lenght</div>
         <div className="user_radar_graph">
-        <ResponsiveContainer width="100%" height="100%">
-          <RadarChart cx="50%" cy="50%" outerRadius="80%" data={userPerformance.data}>
-            <PolarGrid />
-            <PolarAngleAxis dataKey={userPerformance.kind} />
-            <Radar name="Mike" dataKey="value" fill="#ff01014d"/>
-          </RadarChart>
-      </ResponsiveContainer>
+          <ResponsiveContainer width="100%" height="100%">
+            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radar_data}>
+              <PolarGrid />
+              <PolarAngleAxis dataKey="subject" />
+              <Radar name="Mike" dataKey="value" fill="#ff01014d"/>
+            </RadarChart>
+          </ResponsiveContainer>
         </div>
-        <div className="user_score">User Score</div>
+        <div className="user_score">
+          <h3>Score</h3>
+          <ResponsiveContainer width="100%" height={250}>
+            <RadialBarChart 
+              cx="50%" 
+              cy="50%" 
+              innerRadius="70%" 
+              outerRadius="80%" 
+              barSize={10} 
+              data={score_data}
+              startAngle={90}
+              endAngle={90 + 360 * (score_data[0].uv / 100)}
+            >
+              <RadialBar
+                background={{ fill: '#f5f5f5' }}
+                clockWise
+                dataKey="uv"
+                cornerRadius={10}
+                fill={score_data[0].fill}
+              />
+              <text 
+                x="50%" 
+                y="50%" 
+                textAnchor="middle" 
+                dominantBaseline="middle" 
+                className="progress-label"
+              >
+                <tspan
+                  x="50%"
+                  dy="-0.5em" // Déplace le texte 12% légèrement vers le haut pour mieux aligner
+                  fontSize="24"
+                  fontWeight="bold"
+                  fill="#000"
+                >
+                  {`${score_data[0].uv}%`}
+                </tspan>
+                <tspan
+                  x="50%"
+                  dy="1.5em" // Positionne "de votre objectif" en dessous de 12%
+                  fontSize="1.2rem"
+                  fill="#a9a9a9" // Utilisez la couleur grise claire ici
+                  className="obj_text"
+                >
+                  de votre objectif
+                </tspan>
+              </text>
+            </RadialBarChart>
+          </ResponsiveContainer>
+        </div>
         <div className="user_nutrition">
           {/* map User_main_data pour appeler 4 div => composant UserNutritionCard */}
         </div>
