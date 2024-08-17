@@ -1,0 +1,32 @@
+@use "../../stylesheet/variables" as v;
+
+.user-nutrition-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px 30px;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    .icon_tab{
+        border-radius: 10px;
+        svg{
+            color: v.$color-primary;
+            font-size: 3rem;
+            margin: 1.5rem;
+        }
+    }
+  
+    .nutrition-info {
+      margin-left: 20px;
+  
+      .nutrition-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+  
+      .nutrition-label {
+        font-size: 1rem;
+        color: #74798c;
+      }
+    }
+  }

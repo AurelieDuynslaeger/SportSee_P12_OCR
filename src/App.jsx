@@ -2,7 +2,9 @@
 import LeftNav from './components/LeftNav/LeftNav'
 import TopNav from './components/TopNav/TopNav'
 import CustomTooltip from './components/CustomTooltip';
+import UserNutritionCard from './components/UserNutritionCard/UserNutritionCard';
 import { BsDot } from "react-icons/bs";
+import { FaAppleAlt, FaDrumstickBite, FaFire, FaHamburger } from 'react-icons/fa';
 import './stylesheet/App.scss'
 
 //mock datas
@@ -66,8 +68,8 @@ function App() {
                   <YAxis/>
                   <XAxis dataKey="day"/>
                   <Tooltip content={<CustomTooltip />}/>
-                  <Bar dataKey="kilogram" fill='#020203'/>
-                  <Bar dataKey="calories" fill='#FF0101'/>
+                  <Bar dataKey="kilogram" fill='#020203' barSize={10} radius={[10, 10, 0, 0]}/>
+                  <Bar dataKey="calories" fill='#FF0101'barSize={10} radius={[10, 10, 0, 0]}/>
                 </BarChart>
               </ResponsiveContainer>
           </div>
@@ -79,7 +81,7 @@ function App() {
               data={userAverageSessions.sessions}
               margin={{
                 top: 20,
-                left: 2,
+                left: 5,
                 right: 5,
               }}
             >
@@ -88,7 +90,7 @@ function App() {
                 axisLine={false}
                 tickLine={false}
                 tickFormatter={(tick) => ['L', 'M', 'M', 'J', 'V', 'S', 'D'][tick - 1]}
-                tick={{ fill: '#ffffff', fontSize: 12 }}
+                tick={{ fill: '#ffffff99', fontSize: 12 }}
               />
               <Tooltip/>
               <Line
@@ -160,7 +162,38 @@ function App() {
           </ResponsiveContainer>
         </div>
         <div className="user_nutrition">
-          {/* map User_main_data pour appeler 4 div => composant UserNutritionCard */}
+        <UserNutritionCard 
+            icon={<FaFire />} 
+            iconColor="#ff0101"
+            bgcolor="#FF00000D" 
+            label="Calories" 
+            value={userData.keyData.calorieCount} 
+            unit="kCal" 
+          />
+          <UserNutritionCard 
+            icon={<FaDrumstickBite />} 
+            iconColor="#4ab8ff"
+            bgcolor="#4ab8ff1a" 
+            label="Protéines" 
+            value={userData.keyData.proteinCount} 
+            unit="g" 
+          />
+          <UserNutritionCard 
+            icon={<FaAppleAlt />} 
+            iconColor="#FDCC0C"
+            bgcolor="#F9CE231A" 
+            label="Glucides" 
+            value={userData.keyData.carbohydrateCount} 
+            unit="g" 
+          />
+          <UserNutritionCard 
+            icon={<FaHamburger />} 
+            iconColor="#FD5181"
+            bgcolor="#fd51811a" 
+            label="Lipides" 
+            value={userData.keyData.lipidCount} 
+            unit="g" 
+          />
         </div>
       </div>
     </>

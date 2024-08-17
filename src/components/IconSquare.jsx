@@ -1,9 +1,10 @@
+import React from "react";
 import PropTypes from "prop-types"
 
-const IconSquare = ({icon, bgcolor}) => {
+const IconSquare = ({icon, iconColor, bgcolor}) => {
   return (
     <div className="icon_tab" style={{backgroundColor: bgcolor}}>
-        {icon}
+        {React.cloneElement(icon, { color: iconColor })}
     </div>
   )
 }
@@ -11,7 +12,10 @@ const IconSquare = ({icon, bgcolor}) => {
 IconSquare.propTypes = {
     icon: PropTypes.node.isRequired,
     bgcolor: PropTypes.string.isRequired,
+    iconColor: PropTypes.string,
   };
-
+  IconSquare.defaultProps = {
+    iconColor: '#000000',
+  };
 
 export default IconSquare

@@ -44,6 +44,8 @@
   grid-area: user_daily_activity;
   border-radius: 20px;
   padding: 10px;
+  background-color: #FBFBFB;
+  border-radius: 5px;
   .daily_activity_header{
     display: flex;
     align-items: center;
@@ -102,7 +104,7 @@
     left: 3rem;
     font-size: 1.2rem;
     width: 40%;
-    color: rgba(255, 255, 255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     font-weight: 400;
   }
 }
@@ -118,6 +120,8 @@
 .user_score {
   grid-area: user_score;
   padding: 10px;
+  background-color: #FBFBFB;
+  border-radius: 5px;
   h3{
     font-size: 1.5rem;
     font-weight: 700;
@@ -130,10 +134,12 @@
 
 .user_nutrition {
   grid-area: user_nutrition;
-  background-color: green;
-  border: 2px blue solid;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 

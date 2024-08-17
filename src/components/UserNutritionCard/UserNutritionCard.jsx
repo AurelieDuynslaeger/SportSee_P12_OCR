@@ -1,24 +1,26 @@
-// import IconSquare from "../IconSquare"
+import IconSquare from '../IconSquare';
+import PropTypes from 'prop-types';
+import './UserNutritionCard.scss';
 
-//icons : fire/chicken/apple/burger
-
-// props : Icon, iconsquarebg
-
-const UserNutritionCard = () => {
-
-    //Fetch USER_MAIN_DATA nutrition
-
+const UserNutritionCard = ({ icon, iconColor, bgcolor, label, value, unit }) => {
   return (
-    <div className="user_nutrition_card">
-        {/* icon square */}
-        {/* <IconSquare icon={} bgcolor=""/> */}
-        {/* user_data */}
-        <div className="user_data">
-            <h3>User_main_data Item</h3>
-            <p>User_main_data Item name</p>
-        </div>
+    <div className="user-nutrition-card">
+      <IconSquare icon={icon} iconColor={iconColor} bgcolor={bgcolor} />
+      <div className="nutrition-info">
+        <p className="nutrition-value">{value}{unit}</p>
+        <p className="nutrition-label">{label}</p>
+      </div>
     </div>
-  )
+  );
 }
 
-export default UserNutritionCard
+UserNutritionCard.propTypes = {
+  icon: PropTypes.node.isRequired,
+  iconColor: PropTypes.node.isRequired,
+  bgcolor: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  unit: PropTypes.string.isRequired,
+};
+
+export default UserNutritionCard;
