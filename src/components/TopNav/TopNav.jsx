@@ -1,6 +1,12 @@
 import logo from "../../assets/sportsee_logo.svg"
 import "../TopNav/Topnav.scss"
 
+/**
+ * représente la barre de navigation supérieure avec le logo et les liens de navigation.
+ * 
+ * @returns {React.Element} Le composant TopNav.
+ */
+
 const TopNav = () => {
   return (
     <nav className="top_nav">

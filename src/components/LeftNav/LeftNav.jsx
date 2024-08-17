@@ -6,6 +6,12 @@ import { GiMeditation } from "react-icons/gi";
 import "../LeftNav/Leftnav.scss"
 import IconSquare from "../IconSquare";
 
+/**
+ * représente la barre de navigation latérale avec des icônes pour les activités.
+ * 
+ * @returns {React.Element} Le composant LeftNav.
+ */
+
 
 const LeftNav = () => {
   return (

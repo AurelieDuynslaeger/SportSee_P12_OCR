@@ -1,16 +1,32 @@
-
+//components
 import LeftNav from './components/LeftNav/LeftNav'
 import TopNav from './components/TopNav/TopNav'
 import CustomTooltip from './components/CustomTooltip';
 import UserNutritionCard from './components/UserNutritionCard/UserNutritionCard';
+
+//config nutrition cards (color, icons, bg color etc..)
+import { NUTRITION_CONFIG } from './config/nutritionConfig';
+
+//react-icons
 import { BsDot } from "react-icons/bs";
-import { FaAppleAlt, FaDrumstickBite, FaFire, FaHamburger } from 'react-icons/fa';
+import { FaFire, FaDrumstickBite, FaAppleAlt, FaHamburger } from 'react-icons/fa';
+
+//stylesheet
 import './stylesheet/App.scss'
 
 //mock datas
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from './mocks/mockData';
 
+//recharts components
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis,RadialBarChart, RadialBar, LineChart, Line } from 'recharts';
+
+//icons for NUTRITION_CONFIG
+const ICONS = {
+  FaFire,
+  FaDrumstickBite,
+  FaAppleAlt,
+  FaHamburger
+};
 
 function App() {
 
@@ -162,7 +178,7 @@ function App() {
           </ResponsiveContainer>
         </div>
         <div className="user_nutrition">
-        <UserNutritionCard 
+        {/* <UserNutritionCard 
             icon={<FaFire />} 
             iconColor="#ff0101"
             bgcolor="#FF00000D" 
@@ -193,7 +209,23 @@ function App() {
             label="Lipides" 
             value={userData.keyData.lipidCount} 
             unit="g" 
-          />
+          /> */}
+          {Object.keys(NUTRITION_CONFIG).map(key => {
+                const { icon, iconColor, bgcolor, label, unit } = NUTRITION_CONFIG[key];
+                const IconComponent = ICONS[icon];
+
+                return (
+                    <UserNutritionCard 
+                        key={key}
+                        icon={<IconComponent />}
+                        iconColor={iconColor}
+                        bgcolor={bgcolor}
+                        label={label}
+                        value={userData.keyData[key]}
+                        unit={unit}
+                    />
+                );
+            })}
         </div>
       </div>
     </>
