@@ -7,6 +7,12 @@
     align-items: center;
     font-family: v.$font-roboto;
     padding: 1.5rem;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
     .top_nav_links{
         flex-basis: 80%;
         color: v.$text-light;

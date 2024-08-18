@@ -76,27 +76,25 @@ function App() {
           <div className='daily_activity_barchart'>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart 
-                width={500}
-                height={350}
                 data={userActivity.sessions}
                 >
                   <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false}/>
                   <YAxis/>
                   <XAxis dataKey="day"/>
                   <Tooltip content={<CustomTooltip />}/>
-                  <Bar dataKey="kilogram" fill='#020203' barSize={10} radius={[10, 10, 0, 0]}/>
-                  <Bar dataKey="calories" fill='#FF0101'barSize={10} radius={[10, 10, 0, 0]}/>
+                  <Bar dataKey="kilogram" fill='#020203' barSize={8} radius={[10, 10, 0, 0]}/>
+                  <Bar dataKey="calories" fill='#FF0101'barSize={8} radius={[10, 10, 0, 0]}/>
                 </BarChart>
               </ResponsiveContainer>
           </div>
         </div>
         <div className="user_sessions_length">
           <h3>Durée moyenne des sessions</h3>
-          <ResponsiveContainer width="100%" height={250}>
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={userAverageSessions.sessions}
               margin={{
-                top: 20,
+                top: 0,
                 left: 5,
                 right: 5,
               }}
@@ -130,7 +128,7 @@ function App() {
         </div>
         <div className="user_score">
           <h3>Score</h3>
-          <ResponsiveContainer width="100%" height={250}>
+          <ResponsiveContainer width="100%" height="100%">
             <RadialBarChart 
               cx="50%" 
               cy="50%" 

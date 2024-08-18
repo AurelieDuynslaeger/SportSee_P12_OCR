@@ -1,12 +1,12 @@
 @use "../../stylesheet/variables" as v;
 
 .left_nav{
-    position: absolute;
+    position: fixed;
     left: 0;
     top:0;
-    z-index: -1;
+    z-index:5;
     height: 100vh;
-    width: 7vw;
+    width: 9vw;
     background-color: v.$color-bgnav;
     display: flex;
     align-items: center;
@@ -22,6 +22,7 @@
             align-items: center;
             justify-content: center;
             padding-inline-start: 0;
+            margin: 0;
             li{
                 list-style-type: none;
                 margin-bottom: 2rem;
