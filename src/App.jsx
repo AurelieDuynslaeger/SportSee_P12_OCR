@@ -18,7 +18,7 @@ import './stylesheet/App.scss'
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from './mocks/mockData';
 
 //recharts components
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis,RadialBarChart, RadialBar, LineChart, Line } from 'recharts';
+import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis,RadialBarChart, RadialBar, LineChart, Line } from 'recharts';
 
 //icons for NUTRITION_CONFIG
 const ICONS = {
@@ -79,8 +79,7 @@ function App() {
                 data={userActivity.sessions}
                 >
                   <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false}/>
-                  <YAxis/>
-                  <XAxis dataKey="day"/>
+                  <XAxis dataKey="day" tickFormatter={(value, index) => index + 1} />
                   <Tooltip content={<CustomTooltip />}/>
                   <Bar dataKey="kilogram" fill='#020203' barSize={8} radius={[10, 10, 0, 0]}/>
                   <Bar dataKey="calories" fill='#FF0101'barSize={8} radius={[10, 10, 0, 0]}/>
