@@ -1,0 +1,21 @@
+@use "./variables" as v;
+
+@mixin title($size, $weight: 400, $color: v.$text-dark) {
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+    margin: 0;
+}
+
+@mixin text($size, $color: v.$text-mid) {
+    font-size: $size;
+    color: $color;
+    margin: 0;
+}
+  
+@mixin container($bg-color: #FBFBFB, $padding: 10px, $radius: 5px) {
+padding: $padding;
+background-color: $bg-color;
+border-radius: $radius;
+}
+  

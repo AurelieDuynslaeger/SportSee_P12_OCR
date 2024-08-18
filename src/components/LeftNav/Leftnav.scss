@@ -3,10 +3,10 @@
 .left_nav{
     position: fixed;
     left: 0;
-    top:0;
+    top:80px;
     z-index:5;
-    height: 100vh;
-    width: 9vw;
+    height: calc(100vh - 80px); 
+    width: 7vw;
     background-color: v.$color-bgnav;
     display: flex;
     align-items: center;
@@ -30,7 +30,7 @@
                     border-radius: 10px;
                     svg{
                         padding: 1rem;
-                        font-size: 6rem;
+                        font-size: 5rem;
                     }
                 }
             }
