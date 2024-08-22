@@ -20,6 +20,9 @@ import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, Rada
 
 import { fetchUserMainData, fetchUserActivity, fetchUserAverageSessions, fetchUserPerformance } from './api/apiService';
 
+//standardisation des données
+import { standardizeUserData, standardizePerformanceData} from './utils/utils';
+
 //icons for NUTRITION_CONFIG
 const ICONS = {
   FaFire,
@@ -35,20 +38,26 @@ function App() {
   const [userAverageSessions, setUserAverageSessions] = useState(null);
   const [userPerformance, setUserPerformance] = useState(null);
 
-  const userId = 12;
+  const userId = 18;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        //fetch des données brutes (api ou mock)
         const mainData = await fetchUserMainData(userId);
         const activityData = await fetchUserActivity(userId);
         const averageSessionsData = await fetchUserAverageSessions(userId);
         const performanceData = await fetchUserPerformance(userId);
 
-        setUserData(mainData);
+        console.log('User Performance Data:', performanceData);
+        const standardizedPerformanceData = standardizePerformanceData(performanceData);
+        console.log('Standardized Performance Data:', standardizedPerformanceData);
+
+        //standardisation des données avant de setter le state
+        setUserData(standardizeUserData(mainData));
         setUserActivity(activityData);
         setUserAverageSessions(averageSessionsData);
-        setUserPerformance(performanceData);
+        setUserPerformance(standardizedPerformanceData);
       } catch (error) {
         console.error("Erreur lors du chargement des données", error);
       }
@@ -64,9 +73,10 @@ function App() {
   //doc recharts subject et value pour le radar graph
   //obtenir le label correspondant (compatibles avec Recharts)
   const radar_data = userPerformance.data.map(item => ({
-    subject : userPerformance.kind[item.kind],
+    subject : item.kind,
     value: item.value
   }));
+
 
   //simple radial bar chart pour le score
   const score_data = [{
@@ -82,7 +92,7 @@ function App() {
       <LeftNav/>
       <div className='main_content'>
         <div className='user_header'>
-          <h1>Bonjour <span className='user_first_name'>{userData.userInfos.firstName}</span></h1>
+          <h1>Bonjour <span className='user_first_name'>{userData.firstName}</span></h1>
           <p>Félicitations ! Vous avez explosé vos objectifs d&apos;hier !</p>
         </div>
         <div className="user_daily_activity">
