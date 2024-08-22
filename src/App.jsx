@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 //components
 import LeftNav from './components/LeftNav/LeftNav'
 import TopNav from './components/TopNav/TopNav'
@@ -14,11 +15,10 @@ import { FaFire, FaDrumstickBite, FaAppleAlt, FaHamburger } from 'react-icons/fa
 //stylesheet
 import './stylesheet/App.scss'
 
-//mock datas
-import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from './mocks/mockData';
-
 //recharts components
 import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis,RadialBarChart, RadialBar, LineChart, Line } from 'recharts';
+
+import { fetchUserMainData, fetchUserActivity, fetchUserAverageSessions, fetchUserPerformance } from './api/apiService';
 
 //icons for NUTRITION_CONFIG
 const ICONS = {
@@ -30,10 +30,36 @@ const ICONS = {
 
 function App() {
 
-  const userData = USER_MAIN_DATA.find(user => user.id === 12);
-  const userActivity = USER_ACTIVITY.find(activity => activity.userId === 12);
-  const userAverageSessions = USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === 12);
-  const userPerformance = USER_PERFORMANCE.find(performance => performance.userId === 12);
+  const [userData, setUserData] = useState(null);
+  const [userActivity, setUserActivity] = useState(null);
+  const [userAverageSessions, setUserAverageSessions] = useState(null);
+  const [userPerformance, setUserPerformance] = useState(null);
+
+  const userId = 12;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const mainData = await fetchUserMainData(userId);
+        const activityData = await fetchUserActivity(userId);
+        const averageSessionsData = await fetchUserAverageSessions(userId);
+        const performanceData = await fetchUserPerformance(userId);
+
+        setUserData(mainData);
+        setUserActivity(activityData);
+        setUserAverageSessions(averageSessionsData);
+        setUserPerformance(performanceData);
+      } catch (error) {
+        console.error("Erreur lors du chargement des données", error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  if (!userData || !userActivity || !userAverageSessions || !userPerformance) {
+    return <div>Loading...</div>;
+  }
 
   //doc recharts subject et value pour le radar graph
   //obtenir le label correspondant (compatibles avec Recharts)
