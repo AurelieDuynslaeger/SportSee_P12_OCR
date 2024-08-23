@@ -1,0 +1,58 @@
+@use '../../stylesheet/variables' as v;
+@use "../../stylesheet/reset";
+@use '../../stylesheet/mixins' as m;
+
+.user_daily_activity {
+    grid-area: user_daily_activity;
+    @include m.container();
+    .daily_activity_header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 30px;
+      h2{
+        @include m.title(1.3rem, 700)
+      }
+      .weight_kcal{
+        display: flex;
+        width: 40%;
+        align-items: center;
+        justify-content: space-between;
+        .weight, .kcal {
+          display: flex;
+          align-items: center;
+          p{
+            @include m.text(1.2rem);
+          }
+        }
+        .weight_dot{
+          @include m.text(2.5rem, v.$text-dark);
+        }
+        .kcal_dot{
+          @include m.text(2.5rem, v.$color-primary);
+        }
+      }
+    }
+    .daily_activity_barchart{
+      height: 200px;
+      .custom-tooltip {
+        background-color: v.$color-primary;
+        padding: 10px;
+        color: v.$text-light;
+        position: relative;
+        transform: translateY(-40px);
+        p{
+          @include m.text(0.7rem, v.$text-light);
+          font-weight: 700;
+        }
+      }
+  
+      .recharts-cartesian-axis-tick-line{
+        stroke: none;
+      }
+      .recharts-cartesian-axis-tick-value tspan{
+        font-size: 1rem;
+        color: v.$text-mid;
+      }
+  }
+  }

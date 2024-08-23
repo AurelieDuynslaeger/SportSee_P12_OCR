@@ -1,0 +1,9 @@
+@use '../../stylesheet/variables' as v;
+@use "../../stylesheet/reset";
+@use '../../stylesheet/mixins' as m;
+
+.user_radar_graph {
+  grid-area: user_radar_graph;
+  @include m.container(#282D30);
+  height: 220px;
+}

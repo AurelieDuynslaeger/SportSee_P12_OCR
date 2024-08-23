@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';  // Importer PropTypes pour la validation de
  *
  * @returns {JSX.Element|null} - Retourne le JSX pour le tooltip ou null si pas actif
  */
-const CustomTooltip = ({ active, payload }) => {
+const CustomTooltipDaily = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
@@ -24,7 +24,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 //définition des types de props attendues
-CustomTooltip.propTypes = {
+CustomTooltipDaily.propTypes = {
   active: PropTypes.bool,
   payload: PropTypes.arrayOf(
     PropTypes.shape({
@@ -33,5 +33,5 @@ CustomTooltip.propTypes = {
   )
 };
 
-export default CustomTooltip;
+export default CustomTooltipDaily;
 

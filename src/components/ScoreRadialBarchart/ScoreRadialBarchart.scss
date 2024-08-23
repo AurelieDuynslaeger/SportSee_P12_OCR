@@ -1,0 +1,15 @@
+@use '../../stylesheet/variables' as v;
+@use "../../stylesheet/reset";
+@use '../../stylesheet/mixins' as m;
+
+.user_score {
+  grid-area: user_score;
+  @include m.container();
+  height: 220px;
+  h3{
+    @include m.title(1.5rem, 700)
+  }
+  .obj_text{
+    @include m.text(1.2rem);
+  }
+}
