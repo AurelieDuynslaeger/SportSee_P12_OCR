@@ -15,10 +15,8 @@ const trainingTypeTranslations = {
  */
 export const translateTrainingType = (typeId) => {
     const translation = trainingTypeTranslations[typeId];
-    console.log('Type ID:', typeId, 'Translated Type:', translation);
     return translation || "Inconnu";
 };
-
 
 
 /**
@@ -29,7 +27,7 @@ export const translateTrainingType = (typeId) => {
 
 export const standardizeUserData = (userData) => {
     //vérifie si userData a une propriété data
-    const data = userData.data ? userData.data : userData;
+    const data = userData.data || userData;
     return {
         id: data.id,
         userInfos: {
@@ -48,6 +46,38 @@ export const standardizeUserData = (userData) => {
     };
 };
 
+/**
+ * Standardise les données d'activité en un format uniforme.
+ * @param {Object} activityData - Données d'activité brutes.
+ * @returns {Object} - Données d'activité standardisées.
+ */
+export const standardizeActivityData = (activityData) => {
+    const { sessions } = activityData.data || activityData;
+
+    return {
+        sessions: Array.isArray(sessions) ? sessions.map(session => ({
+            day: session.day,
+            kilogram: session.kilogram,
+            calories: session.calories
+        })) : []
+    };
+};
+
+/**
+ * Standardise les données des sessions moyennes en un format uniforme.
+ * @param {Object} averageSessionsData - Données des sessions moyennes brutes.
+ * @returns {Object} - Données des sessions moyennes standardisées.
+ */
+export const standardizeAverageSessionsData = (averageSessionsData) => {
+    const { sessions } = averageSessionsData.data || averageSessionsData;
+
+    return {
+        sessions: Array.isArray(sessions) ? sessions.map(session => ({
+            day: session.day,
+            sessionLength: session.sessionLength
+        })) : []
+    };
+};
 
 /**
  * Standardise les données de performance en un format uniforme.
@@ -55,19 +85,21 @@ export const standardizeUserData = (userData) => {
  * @returns {Object} - Données de performance standardisées.
  */
 export const standardizePerformanceData = (performanceData) => {
+    //condition pour gérer le cas où les données sont imbriquées sous la clé `data`
+    const performance = performanceData.data || performanceData;
 
-    console.log('Données brutes de performanceData dans standardizePerformanceData:', performanceData);
-    //vérifie si performanceData a une propriété data
-    const data = performanceData.data || performanceData;
-    //si ce n'est pas le cas, la fonction tuiliser performanceData dans le format déjà correct
-    return {
-        //extrait userId et kind
-        userId: data.userId,
-        kind: data.kind,
-        //transforme le tableau data en un format où chaque élément est un objet avec une valeur (value) et un type d'entraînement traduit (kind).
-        data: data.data ? data.data.map(item => ({
-            value: item.value,
-            kind: translateTrainingType(item.kind)
-        })) : []
-    };
+    //vérification si la structure des données est correcte
+    if (!performance || !performance.data || !performance.kind) {
+        return { userId: undefined, kind: undefined, data: [] };
+    }
+
+    const { data, kind, userId } = performance;
+
+    const standardizedData = data.map(item => ({
+        value: item.value,
+        subject: kind[item.kind] || 'Unknown'
+    }));
+
+    return { userId, kind, data: standardizedData };
 };
+

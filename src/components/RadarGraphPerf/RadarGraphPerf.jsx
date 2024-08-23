@@ -17,6 +17,7 @@ import "./RadarGraphPerf.scss"
 
 
 const RadarGraphPerf = ({radarData}) => {
+  console.log("Radar Data before rendering:", radarData);
   return (
     <div className="user_radar_graph">
     <ResponsiveContainer width="100%" height="100%">

@@ -12,7 +12,7 @@ import './stylesheet/App.scss'
 //data services
 import { fetchUserMainData, fetchUserActivity, fetchUserAverageSessions, fetchUserPerformance } from './api/apiService';
 //data standardisation
-import { standardizeUserData, standardizePerformanceData} from './utils/utils';
+import { standardizePerformanceData, standardizeUserData, standardizeActivityData, standardizeAverageSessionsData } from './utils/utils';
 
 //config nutrition cards (color, icons, bg color etc..)
 import { NUTRITION_CONFIG } from './config/nutritionConfig';
@@ -36,21 +36,30 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //fetch des données brutes (api ou mock)
-        const mainData = await fetchUserMainData(userId);
-        const activityData = await fetchUserActivity(userId);
-        const averageSessionsData = await fetchUserAverageSessions(userId);
-        const performanceData = await fetchUserPerformance(userId);
+      //fetch des données brutes (api ou mock)
+      const mainDataResponse = await fetchUserMainData(userId);
+      const activityDataResponse = await fetchUserActivity(userId);
+      const averageSessionsDataResponse = await fetchUserAverageSessions(userId);
+      const performanceDataResponse = await fetchUserPerformance(userId);
 
-        console.log('User Performance Data:', performanceData);
-        const standardizedPerformanceData = standardizePerformanceData(performanceData);
-        console.log('Standardized Performance Data:', standardizedPerformanceData);
+      console.log("Raw API Performance Data:", performanceDataResponse.data);
 
-        //standardisation des données avant de setter le state
-        setUserData(standardizeUserData(mainData));
-        setUserActivity(activityData);
-        setUserAverageSessions(averageSessionsData);
-        setUserPerformance(standardizedPerformanceData);
+      //standardisation des données avant de setter le state
+      const standardizedUserData = standardizeUserData(mainDataResponse);
+      const standardizedActivityData = standardizeActivityData(activityDataResponse);
+      const standardizedAverageSessionsData = standardizeAverageSessionsData(averageSessionsDataResponse);
+      const standardizedPerformanceData = standardizePerformanceData(performanceDataResponse);
+
+      //vérification des données standardisées
+      // console.log('User main data standardisée:', standardizedUserData);
+      // console.log('Activity Data standardisée:', standardizedActivityData);
+      // console.log('Average Sessions Data standardisée:', standardizedAverageSessionsData);
+      console.log('Performance Data standardisée:', standardizedPerformanceData);
+
+      setUserData(standardizedUserData);
+      setUserActivity(standardizedActivityData);
+      setUserAverageSessions(standardizedAverageSessionsData);
+      setUserPerformance(standardizedPerformanceData);
       } catch (error) {
         console.error("Erreur lors du chargement des données", error);
       }
@@ -63,12 +72,15 @@ function App() {
     return <div>Loading...</div>;
   }
 
+  console.log('User Performance State:', userPerformance);
   //doc recharts subject et value pour le radar graph
   //obtenir le label correspondant (compatibles avec Recharts)
   const radar_data = userPerformance.data.map(item => ({
-    subject : item.kind,
+    subject : userPerformance.kind[item.kind],
     value: item.value
   }));
+
+  console.log('Radar Data before rendering:', radar_data);
 
 
   //simple radial bar chart pour le score
@@ -85,7 +97,7 @@ function App() {
       <LeftNav/>
       <div className='main_content'>
         <div className='user_header'>
-          <h1>Bonjour <span className='user_first_name'>{userData.firstName}</span></h1>
+          <h1>Bonjour <span className='user_first_name'>{userData.userInfos.firstName}</span></h1>
           <p>Félicitations ! Vous avez explosé vos objectifs d&apos;hier !</p>
         </div>
 
