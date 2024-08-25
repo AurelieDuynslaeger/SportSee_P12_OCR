@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-
 import {  ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis} from 'recharts';
 import "./RadarGraphPerf.scss"
+
 /**
  * Un composant de graphique radar qui affiche les performances de l'utilisateur 
  * sur différentes dimensions (cardio, énergie, endurance, force, vitesse, intensité).
@@ -14,10 +14,7 @@ import "./RadarGraphPerf.scss"
  * @returns {JSX.Element} Le composant de graphique radar rendu.
  */
 
-
-
 const RadarGraphPerf = ({radarData}) => {
-  console.log("Radar Data before rendering:", radarData);
   return (
     <div className="user_radar_graph">
     <ResponsiveContainer width="100%" height="100%">

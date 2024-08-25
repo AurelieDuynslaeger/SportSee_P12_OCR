@@ -15,7 +15,7 @@ const trainingTypeTranslations = {
  */
 export const translateTrainingType = (typeId) => {
     const translation = trainingTypeTranslations[typeId];
-    console.log(`Traduction pour typeId ${typeId}: ${translation}`);
+    // console.log(`Traduction pour typeId ${typeId}: ${translation}`);
     return translation || "Inconnu";
 };
 
@@ -86,21 +86,30 @@ export const standardizeAverageSessionsData = (averageSessionsData) => {
  * @returns {Object} - Données de performance standardisées.
  */
 export const standardizePerformanceData = (performanceData) => {
-    //condition pour gérer le cas où les données sont imbriquées sous la clé `data`
-    const performance = performanceData.data || performanceData;
+    // console.log("Performance data avant standardisation:", performanceData);
 
-    //vérification si la structure des données est correcte
+    //vérifier si les données sont encapsulées dans un objet `data`
+    const isApiFormat = performanceData.data && performanceData.data.data;
+    const performance = isApiFormat ? performanceData.data : performanceData;
+
+    // console.log("Utilisation de performance:", performance);
+
+    //vérifier que les données ont les champs requis
     if (!performance || !performance.data || !performance.kind) {
         return { userId: undefined, kind: undefined, data: [] };
     }
 
     const { data, kind, userId } = performance;
 
-    const standardizedData = data.map(item => ({
-        value: item.value,
-        subject: translateTrainingType(item.kind) || 'Unknown'
-    }));
+    const standardizedData = data.map(item => {
+        const translatedSubject = translateTrainingType(item.kind);
+        return {
+            value: item.value,
+            subject: translatedSubject || 'Iconnu'
+        };
+    });
 
     return { userId, kind, data: standardizedData };
 };
+
 

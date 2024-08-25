@@ -42,19 +42,11 @@ function App() {
       const averageSessionsDataResponse = await fetchUserAverageSessions(userId);
       const performanceDataResponse = await fetchUserPerformance(userId);
 
-      console.log("Raw API Performance Data:", performanceDataResponse.data);
-
       //standardisation des données avant de setter le state
       const standardizedUserData = standardizeUserData(mainDataResponse);
       const standardizedActivityData = standardizeActivityData(activityDataResponse);
       const standardizedAverageSessionsData = standardizeAverageSessionsData(averageSessionsDataResponse);
       const standardizedPerformanceData = standardizePerformanceData(performanceDataResponse);
-
-      //vérification des données standardisées
-      // console.log('User main data standardisée:', standardizedUserData);
-      // console.log('Activity Data standardisée:', standardizedActivityData);
-      // console.log('Average Sessions Data standardisée:', standardizedAverageSessionsData);
-      console.log('Performance Data standardisée:', standardizedPerformanceData);
 
       setUserData(standardizedUserData);
       setUserActivity(standardizedActivityData);
@@ -72,13 +64,13 @@ function App() {
     return <div>Loading...</div>;
   }
 
-  console.log('User Performance State:', userPerformance);
   //doc recharts subject et value pour le radar graph
   //obtenir le label correspondant (compatibles avec Recharts)
   const radar_data = userPerformance.data.map(item => ({
     subject : item.subject,
     value: item.value
   }));
+
 
   //simple radial bar chart pour le score
   const score_data = [{
