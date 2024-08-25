@@ -5,7 +5,7 @@
 .user_score {
   grid-area: user_score;
   @include m.container();
-  height: 220px;
+  flex: 1;
   h3{
     @include m.title(1.5rem, 700)
   }
