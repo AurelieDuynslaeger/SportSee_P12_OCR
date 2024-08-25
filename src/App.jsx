@@ -76,12 +76,9 @@ function App() {
   //doc recharts subject et value pour le radar graph
   //obtenir le label correspondant (compatibles avec Recharts)
   const radar_data = userPerformance.data.map(item => ({
-    subject : userPerformance.kind[item.kind],
+    subject : item.subject,
     value: item.value
   }));
-
-  console.log('Radar Data before rendering:', radar_data);
-
 
   //simple radial bar chart pour le score
   const score_data = [{

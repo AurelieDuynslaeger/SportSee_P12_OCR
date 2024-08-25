@@ -15,6 +15,7 @@ const trainingTypeTranslations = {
  */
 export const translateTrainingType = (typeId) => {
     const translation = trainingTypeTranslations[typeId];
+    console.log(`Traduction pour typeId ${typeId}: ${translation}`);
     return translation || "Inconnu";
 };
 
@@ -97,7 +98,7 @@ export const standardizePerformanceData = (performanceData) => {
 
     const standardizedData = data.map(item => ({
         value: item.value,
-        subject: kind[item.kind] || 'Unknown'
+        subject: translateTrainingType(item.kind) || 'Unknown'
     }));
 
     return { userId, kind, data: standardizedData };
