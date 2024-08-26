@@ -15,4 +15,16 @@
       width: 40%;
       color: rgba(255, 255, 255, 0.6);
     }
+    .custom-tooltip {
+      background-color: v.$text-light;
+      padding: 10px;
+      color: v.$text-dark;
+      position: relative;
+      transform: translateY(-40px);
+      p{
+        @include m.text(0.9rem, v.$text-dark);
+        font-weight: 700;
+        margin: 10px 0;
+      }
+    }
   }

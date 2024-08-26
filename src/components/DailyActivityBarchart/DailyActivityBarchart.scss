@@ -34,7 +34,6 @@
       }
     }
     .daily_activity_barchart{
-      // height: 200px;
       flex: 1;
       .custom-tooltip {
         background-color: v.$color-primary;
@@ -43,8 +42,10 @@
         position: relative;
         transform: translateY(-40px);
         p{
-          @include m.text(0.7rem, v.$text-light);
+          @include m.text(0.9rem, v.$text-light);
           font-weight: 700;
+          margin: 10px 0;
+          padding-bottom: 5px;
         }
       }
   

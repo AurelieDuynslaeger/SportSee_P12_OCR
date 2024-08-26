@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 //recharts components
 import { XAxis, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 import "./SessionsLenghtLinechart.scss"
+import CustomTooltip from '../CustomTooltip/CustomTooltip';
 /**
  * Un composant de graphique en ligne qui affiche la durée moyenne des sessions de l'utilisateur
  * pour chaque jour de la semaine.
@@ -16,36 +17,38 @@ import "./SessionsLenghtLinechart.scss"
  */
 
 const SessionsLenghtLinechart = ({userAverageSessions}) => {
+
   return (
     <div className="user_sessions_length">
-          <h3>Durée moyenne des sessions</h3>
-    <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              data={userAverageSessions}
-              margin={{
-                top: 0,
-                left: 5,
-                right: 5,
-              }}
-            >
-              <XAxis
-                dataKey="day"
-                axisLine={false}
-                tickLine={false}
-                tickFormatter={(tick) => ['L', 'M', 'M', 'J', 'V', 'S', 'D'][tick - 1]}
-                tick={{ fill: '#ffffff99', fontSize: 12 }}
-              />
-              <Tooltip/>
-              <Line
-                type="monotone"
-                dataKey="sessionLength"
-                stroke="#FFFFFF"
-                dot={false}
-                activeDot={{ r: 2 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>    
-          </div>
+      <h3>Durée moyenne des sessions</h3>
+      <ResponsiveContainer width="100%" height="90%">
+        <LineChart
+          data={userAverageSessions}
+          margin={{
+            top: 5,
+            left: 5,
+            right: 5,
+          }}
+        >
+          <XAxis
+            dataKey="day"
+            axisLine={false}
+            tickLine={false}
+            tickFormatter={(tick) => ['L', 'M', 'M', 'J', 'V', 'S', 'D'][tick - 1]}
+            tick={{ fill: '#ffffff99', fontSize: 12 }}
+          />
+          <Tooltip content={<CustomTooltip isSingleValue={true}/>} />
+          <Line
+            type="monotone"
+            dataKey="sessionLength"
+            stroke="#FFFFFF"
+            strokeWidth={2}
+            dot={false}
+            activeDot={{ r: 3 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>    
+    </div>
   )
 }
 

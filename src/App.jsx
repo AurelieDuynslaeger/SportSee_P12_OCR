@@ -31,7 +31,7 @@ function App() {
   const [userAverageSessions, setUserAverageSessions] = useState(null);
   const [userPerformance, setUserPerformance] = useState(null);
 
-  const userId = 12;
+  const userId = 18;
 
   useEffect(() => {
     const fetchData = async () => {

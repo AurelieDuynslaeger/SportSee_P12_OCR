@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 //react-icons
 import { BsDot } from "react-icons/bs";
 import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import CustomTooltipDaily from '../CustomTooltips/CustomTooltipDaily';
+import CustomTooltip from '../CustomTooltip/CustomTooltip';
 import "./DailyActivityBarchart.scss"
 
 /**
@@ -38,7 +38,7 @@ const DailyActivityBarchart = ({ userActivitySessions }) => {
       <BarChart data={userActivitySessions}>
         <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
         <XAxis dataKey="day" tickFormatter={(value, index) => index + 1} />
-        <Tooltip content={<CustomTooltipDaily />} />
+        <Tooltip content={<CustomTooltip isSingleValue={false} />} />
         <Bar dataKey="kilogram" fill='#020203' barSize={8} radius={[10, 10, 0, 0]} />
         <Bar dataKey="calories" fill='#FF0101' barSize={8} radius={[10, 10, 0, 0]} />
       </BarChart>

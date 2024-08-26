@@ -25,7 +25,8 @@
     "user_header user_header user_header user_header"
     "user_daily_activity user_daily_activity user_daily_activity user_nutrition"
     "user_sessions_length user_radar_graph user_score user_nutrition";
-  gap: 10px; 
+    row-gap: 10px;
+  column-gap: 20px; 
   padding: 20px; 
   font-family: v.$font-roboto;
 }
