@@ -36,32 +36,45 @@ Une partie importante du projet sera de développer une documentation complète 
 ## Langages utilisés et autres technologies utilisées
 
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
-[![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Recharts](https://img.shields.io/badge/Recharts-3182bd?style=for-the-badge&logo=recharts&logoColor=white)](https://recharts.org/)
-[![JSDoc](https://img.shields.io/badge/JSDoc-000000?style=for-the-badge&logo=jsdoc&logoColor=white)](https://jsdoc.app/)
+[![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
+[![JSDoc](https://img.shields.io/badge/JSDoc-FDCC0C?style=for-the-badge&logo=jsdoc&logoColor=white)](https://jsdoc.app/)
 
 
 ## Installation
 
-1. Clonez le repository de l'application
+1. Clonez le repo de l'application
    ```sh
    git clone https://github.com/AurelieDuynslaeger/SportSee_P12_OCR.git
    ```
 
-2. Installez les dépendances
+2. Clonez le repo de l'api et suivre le ReadMe
+    ```sh
+   git clone https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard.git
+   ```
+
+3. Installez les dépendances de sportSee App
     ```sh
    npm install
    ```
    
-3. Lancez le projet
+4. Lancez le projet
     ```sh
    npm run dev
    ```
+
+5. Données : il y a des données mockées et les données d'api. Une clé d'environnement est à créée dans un fichier .env : 
+    ```sh
+    VITE_USE_MOCK_DATA=false
+   ``` 
   
+6 . Cette clé sert de toggle pour passer des données mockées au données api. False : ce sont les données api qui sont utilisées sur l'app. True: inversement, ce seront les données mockées ! 
+
+
 ## Contact
 
 Aurélie D. - [GitHub](https://github.com/AurelieDuynslaeger/)
 
-<!-- MARKDOWN LINKS & IMAGES -->
+

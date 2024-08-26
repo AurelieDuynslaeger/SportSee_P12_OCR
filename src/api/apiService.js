@@ -7,6 +7,13 @@ const API_URL = 'http://localhost:3000/user';
 //détermine si utilisation de l'API ou les données mockées
 const useMockData = import.meta.env.VITE_USE_MOCK_DATA === 'true';
 
+/**
+ * Récupère les données principales de l'utilisateur à partir de l'API ou des données mockées.
+ * 
+ * @param {number} userId - L'ID de l'utilisateur.
+ * @returns {Promise<Object>} - Les données principales de l'utilisateur.
+ * @throws {Error} - Lève une erreur en cas de problème de récupération des données.
+ */
 export const fetchUserMainData = async (userId) => {
     if (useMockData) {
         return USER_MAIN_DATA.find(user => user.id === userId);
@@ -21,6 +28,13 @@ export const fetchUserMainData = async (userId) => {
     }
 };
 
+/**
+ * Récupère les données d'activité de l'utilisateur à partir de l'API ou des données mockées.
+ * 
+ * @param {number} userId - L'ID de l'utilisateur.
+ * @returns {Promise<Object>} - Les données d'activité de l'utilisateur.
+ * @throws {Error} - Lève une erreur en cas de problème de récupération des données.
+ */
 export const fetchUserActivity = async (userId) => {
     if (useMockData) {
         return USER_ACTIVITY.find(activity => activity.userId === userId);
@@ -35,6 +49,13 @@ export const fetchUserActivity = async (userId) => {
     }
 };
 
+/**
+ * Récupère les données de sessions de l'utilisateur à partir de l'API ou des données mockées.
+ * 
+ * @param {number} userId - L'ID de l'utilisateur.
+ * @returns {Promise<Object>} - Les données de sessions de l'utilisateur.
+ * @throws {Error} - Lève une erreur en cas de problème de récupération des données.
+ */
 export const fetchUserAverageSessions = async (userId) => {
     if (useMockData) {
         return USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === userId);
@@ -49,6 +70,13 @@ export const fetchUserAverageSessions = async (userId) => {
     }
 };
 
+/**
+ * Récupère les données de performance de l'utilisateur à partir de l'API ou des données mockées.
+ * 
+ * @param {number} userId - L'ID de l'utilisateur.
+ * @returns {Promise<Object>} - Les données de performance de l'utilisateur.
+ * @throws {Error} - Lève une erreur en cas de problème de récupération des données.
+ */
 export const fetchUserPerformance = async (userId) => {
     if (useMockData) {
         return USER_PERFORMANCE.find(performance => performance.userId === userId);

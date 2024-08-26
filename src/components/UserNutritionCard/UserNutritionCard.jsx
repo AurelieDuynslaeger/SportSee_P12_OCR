@@ -16,11 +16,14 @@ import './UserNutritionCard.scss';
  * @returns {React.Element} Le composant UserNutritionCard.
  */
 const UserNutritionCard = ({ icon, iconColor, bgcolor, label, value, unit }) => {
+  //formater la valeur avec une virgule pour séparer les milliers des kCal nottamment
+  const formattedValue = value.toLocaleString('fr-FR').replace(/\s/g, ',');
+
   return (
     <div className="user-nutrition-card">
       <IconSquare icon={icon} iconColor={iconColor} bgcolor={bgcolor} />
       <div className="nutrition-info">
-        <p className="nutrition-value">{value}{unit}</p>
+        <p className="nutrition-value">{formattedValue}{unit}</p>
         <p className="nutrition-label">{label}</p>
       </div>
     </div>
