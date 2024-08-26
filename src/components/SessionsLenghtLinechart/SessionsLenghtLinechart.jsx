@@ -32,7 +32,7 @@ const SessionsLenghtLinechart = ({userAverageSessions}) => {
 
   const calculateBackground = () => {
     const totalDays = userAverageSessions.length;
-    const percentage = (hoverIndex + 1) / totalDays * 100;
+    const percentage = (hoverIndex + 0.5) / totalDays * 100;
     
     return `linear-gradient(to right, #FF0000 ${percentage}%, #8B0000 ${percentage}%)`;
   };
@@ -64,7 +64,10 @@ const SessionsLenghtLinechart = ({userAverageSessions}) => {
             tickFormatter={(tick) => ['L', 'M', 'M', 'J', 'V', 'S', 'D'][tick - 1]}
             tick={{ fill: '#ffffff99', fontSize: 12 }}
           />
-          <Tooltip content={<CustomTooltip isSingleValue={true}/>} />
+          <Tooltip 
+          content={<CustomTooltip isSingleValue={true}/>}
+          cursor={{ stroke: "transparent" }}
+          />
           <Line
             type="monotone"
             dataKey="sessionLength"

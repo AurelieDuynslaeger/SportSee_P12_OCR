@@ -21,7 +21,7 @@ const RadarGraphPerf = ({radarData}) => {
     <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
       <PolarGrid radialLines={false}/>
       <PolarAngleAxis dataKey="subject" tick={{ fill: '#ffffff', fontSize: 10 }}/>
-      <Radar name="Mike" dataKey="value" fill="#ff01014d"/>
+      <Radar name="Mike" dataKey="value" fill="#ff0101b3"/>
     </RadarChart>
   </ResponsiveContainer>
   </div>
