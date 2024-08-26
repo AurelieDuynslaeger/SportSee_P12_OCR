@@ -6,4 +6,8 @@
   grid-area: user_radar_graph;
   @include m.container(#282D30);
   flex: 1;
+  .recharts-polar-angle-axis-tick-value tspan{
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
 }

@@ -4,14 +4,14 @@
 
 .user_sessions_length {
     grid-area: user_sessions_length;
-    @include m.container(v.$color-primary);
+    @include m.container();
     position: relative;
     flex: 1;
     h3{
       @include m.title(1.2rem);
       position: absolute;
-      top: 1rem;
-      left: 1rem;
+      top: 2rem;
+      left: 3rem;
       width: 40%;
       color: rgba(255, 255, 255, 0.6);
     }

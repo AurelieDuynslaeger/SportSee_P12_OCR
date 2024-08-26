@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 //recharts components
 import { XAxis, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
@@ -18,8 +19,31 @@ import CustomTooltip from '../CustomTooltip/CustomTooltip';
 
 const SessionsLenghtLinechart = ({userAverageSessions}) => {
 
+  const [hoverIndex, setHoverIndex] = useState(-1);
+
+  const handleMouseMove = (state) => {
+    if (state.isTooltipActive) {
+      const { activeTooltipIndex } = state;
+      setHoverIndex(activeTooltipIndex);
+    } else {
+      setHoverIndex(-1);
+    }
+  };
+
+  const calculateBackground = () => {
+    const totalDays = userAverageSessions.length;
+    const percentage = (hoverIndex + 1) / totalDays * 100;
+    
+    return `linear-gradient(to right, #FF0000 ${percentage}%, #8B0000 ${percentage}%)`;
+  };
+
   return (
-    <div className="user_sessions_length">
+    <div className="user_sessions_length"
+    style={{
+      background: hoverIndex >= 0 ? calculateBackground() : '#ff0101', 
+      transition: 'background 0.3s ease',
+    }}
+    >
       <h3>Durée moyenne des sessions</h3>
       <ResponsiveContainer width="100%" height="90%">
         <LineChart
@@ -29,6 +53,9 @@ const SessionsLenghtLinechart = ({userAverageSessions}) => {
             left: 5,
             right: 5,
           }}
+
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setHoverIndex(-1)}
         >
           <XAxis
             dataKey="day"
