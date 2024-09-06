@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 import LeftNav from './components/LeftNav/LeftNav'
 import TopNav from './components/TopNav/TopNav'
 import DailyActivityBarchart from './components/DailyActivityBarchart/DailyActivityBarchart';
@@ -16,6 +17,7 @@ import { standardizePerformanceData, standardizeUserData, standardizeActivityDat
 
 //config nutrition cards (color, icons, bg color etc..)
 import { NUTRITION_CONFIG } from './config/nutritionConfig';
+
 //icons for NUTRITION_CONFIG
 const ICONS = {
   FaFire,
@@ -24,23 +26,27 @@ const ICONS = {
   FaHamburger
 };
 
-function App() {
+const UserDashboard = () => {
 
+  const {userId} = useParams();
+  console.log("Render le Dashboard de l'User avec l'id:", userId);
   const [userData, setUserData] = useState(null);
   const [userActivity, setUserActivity] = useState(null);
   const [userAverageSessions, setUserAverageSessions] = useState(null);
   const [userPerformance, setUserPerformance] = useState(null);
 
-  const userId = 18;
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+
+        const userIdNumber = parseInt(userId, 10);
       //fetch des données brutes (api ou mock)
-      const mainDataResponse = await fetchUserMainData(userId);
-      const activityDataResponse = await fetchUserActivity(userId);
-      const averageSessionsDataResponse = await fetchUserAverageSessions(userId);
-      const performanceDataResponse = await fetchUserPerformance(userId);
+      const mainDataResponse = await fetchUserMainData(userIdNumber);
+      const activityDataResponse = await fetchUserActivity(userIdNumber);
+      const averageSessionsDataResponse = await fetchUserAverageSessions(userIdNumber);
+      const performanceDataResponse = await fetchUserPerformance(userIdNumber);
 
       //standardisation des données avant de setter le state
       const standardizedUserData = standardizeUserData(mainDataResponse);
@@ -150,6 +156,16 @@ function App() {
         </div>
       </div>
     </>
+  );
+};
+
+function App() {
+  return(
+  <Router>
+    <Routes>
+    <Route path="/user/:userId" element={<UserDashboard />} />
+    </Routes>
+  </Router>
   )
 }
 
