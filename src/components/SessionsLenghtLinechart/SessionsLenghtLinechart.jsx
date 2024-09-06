@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 //recharts components
-import { XAxis, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 import "./SessionsLenghtLinechart.scss"
 import CustomTooltip from '../CustomTooltip/CustomTooltip';
 /**
@@ -32,27 +32,39 @@ const SessionsLenghtLinechart = ({userAverageSessions}) => {
 
   const calculateBackground = () => {
     const totalDays = userAverageSessions.length;
-    const percentage = (hoverIndex + 0.5) / totalDays * 100;
+    //largeur totale du conteneur en pourcentage
+    const totalWidth = 100; 
+    const hoverPosition = (hoverIndex + 0.5) / totalDays * totalWidth;
+  
+    //ajuste le décalage en ajoutant ou en soustrayant une petite valeur (par exemple, 0.1%)
+    const adjustedHoverPosition = Math.min(Math.max(hoverPosition, 0), totalWidth);
     
-    return `linear-gradient(to right, #FF0000 ${percentage}%, #8B0000 ${percentage}%)`;
+    return `linear-gradient(to right, #FF0000 ${adjustedHoverPosition}%, #8B0000 ${adjustedHoverPosition}%)`;
   };
+  
+  //détermine les valeurs min et max pour la durée des sessions
+  const minSessionLength = Math.min(...userAverageSessions.map(session => session.sessionLength)) - 10;
+  const maxSessionLength = Math.max(...userAverageSessions.map(session => session.sessionLength)) + 20;
   
 
   return (
     <div className="user_sessions_length"
     style={{
-      background: hoverIndex >= 0 ? calculateBackground() : '#ff0101', 
-      transition: 'background 0.3s ease',
+      position: 'relative',
+    overflow: 'hidden',
+    background: hoverIndex >= 0 ? calculateBackground() : '#ff0101',
+    transition: 'background 0.3s ease',
     }}
     >
       <h3>Durée moyenne des sessions</h3>
-      <ResponsiveContainer width="100%" height="90%">
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={userAverageSessions}
           margin={{
-            top: 5,
-            left: 5,
-            right: 5,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom:0
           }}
 
           onMouseMove={handleMouseMove}
@@ -64,6 +76,14 @@ const SessionsLenghtLinechart = ({userAverageSessions}) => {
             tickLine={false}
             tickFormatter={(tick) => ['L', 'M', 'M', 'J', 'V', 'S', 'D'][tick - 1]}
             tick={{ fill: '#ffffff99', fontSize: 12 }}
+            padding={{ left: 5, right: 5 }}
+          />
+          <YAxis
+            domain={[minSessionLength, maxSessionLength]} // 
+            axisLine={false}
+            tickLine={false}
+            tick={{ fill: '#ffffff99', fontSize: 12 }}
+            hide={true}
           />
           <Tooltip 
           content={<CustomTooltip isSingleValue={true}/>}
@@ -75,7 +95,7 @@ const SessionsLenghtLinechart = ({userAverageSessions}) => {
             stroke="#FFFFFF"
             strokeWidth={2}
             dot={false}
-            activeDot={{ r: 3 }}
+            activeDot={{ r: 4 }}
           />
         </LineChart>
       </ResponsiveContainer>    

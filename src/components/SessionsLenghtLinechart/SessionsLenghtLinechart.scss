@@ -5,6 +5,7 @@
 .user_sessions_length {
     grid-area: user_sessions_length;
     @include m.container();
+    // padding: 5px;
     position: relative;
     flex: 1;
     h3{
