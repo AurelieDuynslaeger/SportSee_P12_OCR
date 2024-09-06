@@ -36,6 +36,7 @@ const SessionsLenghtLinechart = ({userAverageSessions}) => {
     
     return `linear-gradient(to right, #FF0000 ${percentage}%, #8B0000 ${percentage}%)`;
   };
+  
 
   return (
     <div className="user_sessions_length"

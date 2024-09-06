@@ -18,6 +18,20 @@ import "./DailyActivityBarchart.scss"
  * @returns {JSX.Element} Le composant de diagramme à barres rendu.
  */
 const DailyActivityBarchart = ({ userActivitySessions }) => {
+
+  //calcul des limites pour l'axe Y (poids)
+  const minWeight = Math.min(...userActivitySessions.map(session => session.kilogram))-1;
+  const maxWeight = minWeight + 7;
+
+  //générer les valeurs des ticks pour l'axe Y des poids (un trait tous les kg)
+  //nvl instance = définir la longueur de tableau
+  //longueur = différence entre min weight et max weight
+  //si 70 et 73kg+1 donc 4
+  //_ élément actuel du tableau, i = index de l'élement
+  //chaque élement sera calculé en ajoutant l'index à min weight
+  //70 +0, 70+1,  70+2 etc...=> ticks pr le Y axis 
+  const weightTicks = Array.from({ length: maxWeight - minWeight + 1 }, (_, i) => minWeight + i);
+
   return (
     <div className="user_daily_activity">
     <div className='daily_activity_header'>
@@ -36,12 +50,27 @@ const DailyActivityBarchart = ({ userActivitySessions }) => {
     <div className='daily_activity_barchart'>
     <ResponsiveContainer width="100%" height="100%">
       <BarChart data={userActivitySessions}>
-        <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+        <CartesianGrid strokeDasharray="1 1" horizontal={true} vertical={false} />
         <XAxis dataKey="day" tickFormatter={(value, index) => index + 1} />
-        <YAxis orientation="right" axisLine={false} tickLine={false} />
+        {/* axe Y visible pour les poids */}
+        <YAxis
+              yAxisId="weight"
+              orientation="right"
+              axisLine={false}
+              tickLine={false}
+              domain={[minWeight, maxWeight]}
+              ticks={weightTicks}
+            />
+
+            {/* axe Y invisible pour les calories */}
+            <YAxis
+              yAxisId="calories"
+              hide={true}
+              domain={[0, 600]}//échelle fixée des calories de 0 à 600
+            />
         <Tooltip content={<CustomTooltip isSingleValue={false} />} />
-        <Bar dataKey="kilogram" fill='#020203' barSize={8} radius={[10, 10, 0, 0]} />
-        <Bar dataKey="calories" fill='#FF0101' barSize={8} radius={[10, 10, 0, 0]} />
+        <Bar dataKey="kilogram" yAxisId="weight" fill='#020203' barSize={8} radius={[10, 10, 0, 0]} />
+        <Bar dataKey="calories" yAxisId="calories" fill='#FF0101' barSize={8} radius={[10, 10, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
     </div>
