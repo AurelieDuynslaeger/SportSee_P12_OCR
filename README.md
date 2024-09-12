@@ -88,8 +88,8 @@ Le projet utilise soit des **données mockées**, soit des **données API**. Une
 
 Deux routes sont disponibles pour visualiser les données des utilisateurs enregistrés dans l'API :
 
-- `localhost:3000/user/12` : Affiche le tableau de bord de l'utilisateur avec l'ID 12.
-- `localhost:3000/user/18` : Affiche le tableau de bord de l'utilisateur avec l'ID 18.
+- `localhost:5173/user/12` : Affiche le tableau de bord de l'utilisateur avec l'ID 12.
+- `localhost:5173/user/18` : Affiche le tableau de bord de l'utilisateur avec l'ID 18.
 
 Ces deux utilisateurs contiennent des données mockées ou récupérées de l'API selon la configuration du fichier `.env`.
 
