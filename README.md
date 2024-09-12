@@ -93,6 +93,37 @@ Deux routes sont disponibles pour visualiser les données des utilisateurs enreg
 
 Ces deux utilisateurs contiennent des données mockées ou récupérées de l'API selon la configuration du fichier `.env`.
 
+
+## Gestion des erreurs
+
+L'application gère les erreurs pouvant survenir lors de la récupération des données via l'API ou lorsqu'une route non valide est visitée. Voici comment ces erreurs sont gérées :
+
+### Gestion des erreurs API
+
+Lors de la récupération des données d'un utilisateur via l'API, si l'API rencontre une erreur (par exemple, si elle est hors ligne ou si l'ID de l'utilisateur n'existe pas), l'application affichera une page d'erreur personnalisée avec un message approprié :
+
+- Si l'API ne répond pas ou retourne une erreur, la page affiche le message :  
+  `"Erreur lors du chargement des données, veuillez réessayer plus tard."`
+
+- La gestion de cette erreur est réalisée via un bloc `try...catch`, et l'état de l'erreur est passé au composant `NotFoundPage` pour afficher le message d'erreur dynamique.
+
+### Gestion des routes non définies
+
+Si un utilisateur tente d'accéder à une URL qui n'est pas définie dans l'application (par exemple, une route autre que `/user/12` ou `/user/18`), une page 404 est affichée avec un message d'erreur indiquant que la page demandée n'existe pas.
+
+#### Exemple d'affichage d'erreur
+
+```jsx
+if (error) {
+  return <NotFoundPage errorMessage="Erreur lors du chargement des données, veuillez réessayer plus tard." />;
+} else {
+  return <NotFoundPage />;
+}
+```
+
+Cela garantit une gestion robuste des erreurs pour améliorer l'expérience utilisateur en cas de problème avec les données ou la navigation.
+
+
 ## Contact
 
 Aurélie D. - [GitHub](https://github.com/AurelieDuynslaeger/)
