@@ -17,6 +17,7 @@ import { standardizePerformanceData, standardizeUserData, standardizeActivityDat
 
 //config nutrition cards (color, icons, bg color etc..)
 import { NUTRITION_CONFIG } from './config/nutritionConfig';
+import NotFound from './pages/NotFound';
 
 //icons for NUTRITION_CONFIG
 const ICONS = {
@@ -35,6 +36,7 @@ const UserDashboard = () => {
   const [userAverageSessions, setUserAverageSessions] = useState(null);
   const [userPerformance, setUserPerformance] = useState(null);
 
+  const [error, setError] = useState(null);
 
 
   useEffect(() => {
@@ -60,14 +62,17 @@ const UserDashboard = () => {
       setUserPerformance(standardizedPerformanceData);
       } catch (error) {
         console.error("Erreur lors du chargement des données", error);
+        setError("Erreur lors du chargement des données, veuillez réessayer plus tard.")
       }
     };
 
     fetchData();
   }, [userId]);
 
-  if (!userData || !userActivity || !userAverageSessions || !userPerformance) {
-    return <div>Loading...</div>;
+  if(error){
+    return <NotFound errorMsg={error}/>
+  } else if (!userData || !userActivity || !userAverageSessions || !userPerformance){
+    return <NotFound/>
   }
 
   //doc recharts subject et value pour le radar graph
@@ -164,6 +169,7 @@ function App() {
   <Router>
     <Routes>
     <Route path="/user/:userId" element={<UserDashboard />} />
+    <Route path="*" element={<NotFound/>}/>
     </Routes>
   </Router>
   )
